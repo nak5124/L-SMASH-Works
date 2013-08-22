@@ -423,6 +423,9 @@ INPUT_HANDLE func_open( LPSTR file )
             if( video_none && audio_none && reader.close_file )
                 reader.close_file( private_stuff );
         }
+        /* open MP4/MOV/3GPP files which heve no audios by libavsmash reader */
+        if( hp->video_reader == libavsmash_reader.type && audio_none )
+            break;
         /* Found both video and audio reader. */
         if( hp->video_reader != READER_NONE && hp->audio_reader != READER_NONE )
             break;
